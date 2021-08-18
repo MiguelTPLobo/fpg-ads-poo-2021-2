@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>JAVA EE - Index</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>var contador = 1</script>
+    </head>
+    <body>
+        <h1>JAVA EE</h1>
+        <h2><a href="page2.html">Página 2</a></h2>
+        <h2><a href="pasta/page3.html">Página 3</a></h2>
+        <hr>
+        <h2> SERVLETS </h2>
+        <h2><a href="DateTimeServlet">DATA E HORA DO SERVIDOR</a></h2>
+        <h2><a href="GreetingServlet">SAULGADO</a></h2>
+        <h2><a href="RandomServlet">ALETORIOS</a></h2>
+        <h3>Tabuada:</h3>
+        <form action="MultiplicationTableServlet">
+            <input type="number" name="n" value='2'/>
+            <input type="submit" value="Calcular"/>
+        </form>
+        <h3>Soma:</h3>
+        <form action="SumServlet">
+            <input type="number" name="n1" step="0.01" value='1'/>
+            <input type="number" name="n2" step="0.01" value='1'/>
+            <input type="submit" value="Calcular"/>
+        </form>
+        <button onclick="alert('Contador = ' + contador++ )">CONTADOR</button>
+    </body>
+</html>
