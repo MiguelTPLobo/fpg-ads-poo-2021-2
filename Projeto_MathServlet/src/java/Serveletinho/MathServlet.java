@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package Serveletinho;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author migue
  */
-@WebServlet(name = "SumServlet", urlPatterns = {"/SumServlet"})
-public class SumServlet extends HttpServlet {
+@WebServlet(name = "MathServlet", urlPatterns = {"/MathServlet"})
+public class MathServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,25 +33,47 @@ public class SumServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>MathServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h4><a href='index.html'>Voltar</a></h4>");
-            out.println("<h1>JavaEE</h1>");
-            out.println("<h2>Servlets</h2>");
-            out.println("<h3>Soma</h3>");
-            double n1, n2 = 0;
+            out.println("<h1>Calculos</h1>");
+            out.println("<h3>Adição</h3>");
+            double n1a, n2a, n1s, n2s, n1d, n2d, n1m, n2m  = 0;
             try{
-                n1 = Double.parseDouble(request.getParameter("n1"));
-                n2 = Double.parseDouble(request.getParameter("n2"));
-                out.println("<h4>"+n1+" + "+n2+" = "+(n1+n2)+"</h4>");
+                n1a = Double.parseDouble(request.getParameter("n1a"));
+                n2a = Double.parseDouble(request.getParameter("n2a"));
+                out.println("<h4>"+n1a+" + "+n2a+" = "+(n1a+n2a)+"</h4>");
             }catch(NumberFormatException ex){
                 out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
             }
+            out.println("<h3>Subtração</h3>");
+            try{
+                n1s = Double.parseDouble(request.getParameter("n1s"));
+                n2s = Double.parseDouble(request.getParameter("n2s"));
+                out.println("<h4>"+n1s+" - "+n2s+" = "+(n1s-n2s)+"</h4>");
+            }catch(NumberFormatException ex){
+                out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
+            }
+            out.println("<h3>Divisão</h3>");
+            try{
+                n1d = Double.parseDouble(request.getParameter("n1d"));
+                n2d = Double.parseDouble(request.getParameter("n2d"));
+                out.println("<h4>"+n1d+" / "+n2d+" = "+(n1d/n2d)+"</h4>");
+            }catch(NumberFormatException ex){
+                out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
+            }
+            out.println("<h3>Multiplicação</h3>");
+            try{
+                n1m = Double.parseDouble(request.getParameter("n1m"));
+                n2m = Double.parseDouble(request.getParameter("n2m"));
+                out.println("<h4>"+n1m+" * "+n2m+" = "+(n1m*n2m)+"</h4>");
+            }catch(NumberFormatException ex){
+                out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
+            }
+            out.println("<h4><a href='index.html'>Voltar</a></h4>");
             out.println("</body>");
             out.println("</html>");
         }

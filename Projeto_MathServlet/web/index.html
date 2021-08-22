@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TAREFA AULA 3.2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <center>
+            <h1>TAREFA AULA 3.2</h1>
+            <h2>DADOS DO ALUNO:</h2>
+            <form action="MiguelServlet">
+                <h3>Numero de Matricula do aluno (RA):</h3>
+                    <input type="text" name="ra" value="1290482012023"/>
+                <input type="submit" value="Enviar"/>
+            </form>
+            <hr>
+            <h2> SERVLETS </h2>
+            <h3>Operaçôes Matematicas:</h3>
+            <form action="MathServlet">
+                <h4>Adição:</h4>
+                <input type="number" name="n1a" step="0.01" value='1'/>
+                <input type="number" name="n2a" step="0.01" value='1'/>
+                <br>
+                <h4>Subtração:</h4>
+                <input type="number" name="n1s" step="0.01" value='1'/>
+                <input type="number" name="n2s" step="0.01" value='1'/>
+                <br>
+                <h4>Divisão:</h4>
+                <input type="number" name="n1d" step="0.01" value='1'/>
+                <input type="number" name="n2d" step="0.01" value='1'/>
+                <br>
+                <h4>Multiplicação:</h4>
+                <input type="number" name="n1m" step="0.01" value='1'/>
+                <input type="number" name="n2m" step="0.01" value='1'/><br><br>
+                <input type="submit" value="Calcular"/>
+            </form>
+        </center>
+    </body>
+</html>

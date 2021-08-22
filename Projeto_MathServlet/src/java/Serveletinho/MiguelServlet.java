@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package Serveletinho;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author migue
  */
-@WebServlet(name = "SumServlet", urlPatterns = {"/SumServlet"})
-public class SumServlet extends HttpServlet {
+@WebServlet(name = "MiguelServlet", urlPatterns = {"/MiguelServlet"})
+public class MiguelServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,25 +34,29 @@ public class SumServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>MathServlet</title>");            
+            out.println("<title>Dados do Aluno</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h4><a href='index.html'>Voltar</a></h4>");
-            out.println("<h1>JavaEE</h1>");
-            out.println("<h2>Servlets</h2>");
-            out.println("<h3>Soma</h3>");
-            double n1, n2 = 0;
+            out.println("<h1>Dados do Aluno</h1>");
+            BigInteger reallyBig = new BigInteger("1290482012023");
             try{
-                n1 = Double.parseDouble(request.getParameter("n1"));
-                n2 = Double.parseDouble(request.getParameter("n2"));
-                out.println("<h4>"+n1+" + "+n2+" = "+(n1+n2)+"</h4>");
+                BigInteger ra = new BigInteger(request.getParameter("ra"));
+                int compareValue = reallyBig.compareTo(ra);
+                
+                if(compareValue == 0){
+                    out.println("<h2>RA: "+ra+"</h2>");
+                    out.println("<h2>Nome Completo: Miguel Trigo Pinheiro Lobo</h2>");
+                    out.println("<h2>GitHub:<a href='https://github.com/MiguelTPLobo'>MiguelTPLobo</a></h2>");
+                } else {
+                    out.println("<p style='color:red'> O RA: "+ra+" não consta no banco de dados!");
+                }
             }catch(NumberFormatException ex){
                 out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
             }
+            out.println("<h4><a href='index.html'>Voltar</a></h4>");
             out.println("</body>");
             out.println("</html>");
         }
