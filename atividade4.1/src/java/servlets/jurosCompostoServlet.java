@@ -37,7 +37,7 @@ public class jurosCompostoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet jurosCompostoServlet</title>");            
+            out.println("<title>Resultado Juros Composto</title>");            
             out.println("</head>");
             out.println("<body>");
             double va, percent, m  = 0;
@@ -46,6 +46,9 @@ public class jurosCompostoServlet extends HttpServlet {
                 va = Double.parseDouble(request.getParameter("va"));
                 percent = Double.parseDouble(request.getParameter("percent"));
                 tm = Integer.parseInt(request.getParameter("tm"));
+                out.print("<h3>Valor Atual: "+va+"</h3>");
+                out.print("<h3>juros (em %): "+percent+"</h3>");
+                out.print("<h3>Tempo (Meses): "+tm+"</h3>");
                 percent = percent/100;
                 m = va * Math.pow(1+percent,tm);
                 out.println("<h4>O resultado do Juros Composto é: "+ m +" Reais</h4>");

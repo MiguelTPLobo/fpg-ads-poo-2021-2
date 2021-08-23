@@ -46,6 +46,9 @@ public class jurosSimplesServlet extends HttpServlet {
                 va = Double.parseDouble(request.getParameter("va"));
                 percent = Double.parseDouble(request.getParameter("percent"));
                 tm = Integer.parseInt(request.getParameter("tm"));
+                out.print("<h3>Valor Atual: "+va+"</h3>");
+                out.print("<h3>juros (em %): "+percent+"</h3>");
+                out.print("<h3>Tempo (Meses): "+tm+"</h3>");
                 out.println("<h4>O resultado do Juros Simples é: "+ ((va * percent)*tm) +" Reais</h4>");
             }catch(NumberFormatException ex){
                 out.println("<p style='color:red'>Erro ao ler parametros: "+ex.getMessage()+"<p>");
