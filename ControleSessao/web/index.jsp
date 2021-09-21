@@ -25,6 +25,7 @@
         </form>
         <h3> Tente Usuario = ADM </h3>
         <h3> Tente Senha = 123 </h3>
+        <h5> Professor acabei por fazer uma validação não profissional, mais efetiva achando que tinha que realmente fazer isso e me atrasei, desculpe ;-; </h5>
         <%}%>
         <%
             if(session.getAttribute("user")!= null && session.getAttribute("password")!= null){
