@@ -7,12 +7,12 @@
 <%  
     ArrayList <String> copy = new ArrayList<>();
     
-    if(application.getAttribute("userList") == null){  
+    if(application.getAttribute("userList") == null){
+    
         ArrayList <String> usernameList = new ArrayList<>();
-        application.setAttribute("userList",usernameList);
+        application.setAttribute("userList", usernameList);
+    
     }
-    
-    
     
     
     if(request.getParameter("login") != null){
@@ -33,26 +33,32 @@
                 application.setAttribute("count", 1);
                 
             }
+            
             ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
             usernameList.add(user);
             application.setAttribute("userList", usernameList);
+            response.sendRedirect(request.getRequestURI());
             
             if(session.getAttribute("megaNums") == null){
+    
                 ArrayList <Integer> nm = new ArrayList<>();
                 int i = 0;
-                while(i < 60){
-                    nm.add(i);
+                while (i < 60){
+                    if(i != 0){
+                        nm.add(i);
+                    }
                     i++;
                 }
                 Collections.shuffle(nm);
-                ArrayList <Integer> shuffled = new ArrayList<>(); 
-                for(int x = 0; x < 6;x++){
+                ArrayList <Integer> shuffled = new ArrayList<>();
+                for(int x = 0; x < 6; x++){
                     shuffled.add(nm.get(x));
                 }
-                session.setAttribute("megaNums",shuffled);
+                session.setAttribute("megaNums", shuffled);
+                
             }
         }
-        response.sendRedirect(request.getRequestURI());
+        
         
         
         
@@ -61,32 +67,36 @@
             
         }else{
             ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
-     
+            
             for(int i = 0; i < usernameList.size(); i++){
+            
                 if(usernameList.get(i).equals(session.getAttribute("user"))){
+                
                     usernameList.remove(i);
-                    session.setAttribute("userList",usernameList);
+                    session.setAttribute("userList", usernameList);
                 }
+                    
             }
+            
             int countHere = (Integer) application.getAttribute("count");
             if(countHere > 0){
                 countHere--;
                 application.setAttribute("count", countHere);
+                
             }
             session.removeAttribute("user");
             session.removeAttribute("password");
             session.removeAttribute("megaNums");
-            //response.sendRedirect("index.jsp");
-            response.sendRedirect(request.getRequestURI());
+            response.sendRedirect("index.jsp");
         }
     }
     ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
     ArrayList <Integer> shuffled = (ArrayList<Integer>) session.getAttribute("megaNums");
+    
     for( String i : usernameList){
         if(!copy.contains(i)){
         copy.add(i);}
     }
-
 %>
 
 <style>body{background-color: #C8C8C8;}</style>
@@ -99,7 +109,7 @@
   <a class="navbar-brand" href="index.jsp">HOME</a>
   <a class="navbar-brand" href="MiguelLobo.jsp">DADOS</a>
   <a class="navbar-brand" href="MiguelLobo-DicaMegaSena.jsp">MEGA SENA</a>
-  <form class="form-inline" method="POST" action="index.jsp">
+  <form class="form-inline">
       <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" value="sair" name="logout">Logout</button>
   </form>
 </nav>
