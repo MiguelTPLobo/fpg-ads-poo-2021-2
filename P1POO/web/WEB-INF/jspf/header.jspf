@@ -1,0 +1,124 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page pageEncoding="UTF-8" %>
+<%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.Random"%>
+<%  
+    ArrayList <String> copy = new ArrayList<>();
+    
+    if(application.getAttribute("userList") == null){  
+        ArrayList <String> usernameList = new ArrayList<>();
+        application.setAttribute("userList",usernameList);
+    }
+    
+    
+    
+    
+    if(request.getParameter("login") != null){
+        if(request.getParameter("user").equals(null) || request.getParameter("user").isEmpty() || request.getParameter("password").equals(null) || request.getParameter("password").isEmpty() ){
+            session.removeAttribute("user");
+            session.removeAttribute("password");
+        }else{
+            String user = request.getParameter("user");
+            String password = request.getParameter("password");
+            session.setAttribute("user", user);
+            session.setAttribute("password", password);
+            if( application.getAttribute("count") != null){
+                int countHere = (Integer) application.getAttribute("count");
+                countHere++;
+                application.setAttribute("count", countHere);
+            }
+            else{
+                application.setAttribute("count", 1);
+                
+            }
+            ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
+            usernameList.add(user);
+            application.setAttribute("userList", usernameList);
+            
+            if(session.getAttribute("megaNums") == null){
+                ArrayList <Integer> nm = new ArrayList<>();
+                int i = 0;
+                while(i < 60){
+                    nm.add(i);
+                    i++;
+                }
+                Collections.shuffle(nm);
+                ArrayList <Integer> shuffled = new ArrayList<>(); 
+                for(int x = 0; x < 6;x++){
+                    shuffled.add(nm.get(x));
+                }
+                session.setAttribute("megaNums",shuffled);
+            }
+        }
+        response.sendRedirect(request.getRequestURI());
+        
+        
+        
+    }else if(request.getParameter("logout") != null){
+        if(request.getParameter("logout").isEmpty()){
+            
+        }else{
+            ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
+     
+            for(int i = 0; i < usernameList.size(); i++){
+                if(usernameList.get(i).equals(session.getAttribute("user"))){
+                    usernameList.remove(i);
+                    session.setAttribute("userList",usernameList);
+                }
+            }
+            int countHere = (Integer) application.getAttribute("count");
+            if(countHere > 0){
+                countHere--;
+                application.setAttribute("count", countHere);
+            }
+            session.removeAttribute("user");
+            session.removeAttribute("password");
+            session.removeAttribute("megaNums");
+            response.sendRedirect("index.jsp");
+            //response.sendRedirect(request.getRequestURI());
+        }
+    }
+    ArrayList <String> usernameList = (ArrayList) application.getAttribute("userList");
+    ArrayList <Integer> shuffled = (ArrayList<Integer>) session.getAttribute("megaNums");
+    for( String i : usernameList){
+        if(!copy.contains(i)){
+        copy.add(i);}
+    }
+
+%>
+
+<style>body{background-color: #C8C8C8;}</style>
+<h2>Miguel Lobo</h2>
+<%
+    if(session.getAttribute("user")!= null && session.getAttribute("password")!= null){
+%>
+<h3>Seja Bem Vindo, <%= session.getAttribute("user") %></h3>
+<!--
+| <a href="index.jsp">INDEX</a> |
+<a href="MiguelLobo.jsp">DADOS</a> |
+<a href="MiguelLobo-DicaMegaSena.jsp">MEGA SENA</a> |
+<input type="submit" name="logout" value="Sair" />
+-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="index.jsp">HOME</a>
+  <a class="navbar-brand" href="MiguelLobo.jsp">DADOS</a>
+  <a class="navbar-brand" href="MiguelLobo-DicaMegaSena.jsp">MEGA SENA</a>
+  <form class="form-inline">
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" name="logout">Logout</button>
+  </form>
+</nav>
+<%}%>
+ <%
+    if(session.getAttribute("user")== null && session.getAttribute("password")== null){
+  %>
+        <h3>Login:</h3>
+        <form method="POST" action="index.jsp">
+            Usuario: <input type="text" name="user"/>
+            Senha: <input type="password" name="password"/>
+            <button type="submit" class="btn btn-outline-success" name="login">Enviar</button>
+        </form>
+        <%}%>
+        
+<hr/>
