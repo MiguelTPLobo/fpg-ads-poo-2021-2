@@ -16,14 +16,11 @@
     
     
     if(request.getParameter("login") != null){
-        if(request.getParameter("user").equals(null) || request.getParameter("user").isEmpty() || request.getParameter("password").equals(null) || request.getParameter("password").isEmpty() ){
+        if(request.getParameter("user").equals(null) || request.getParameter("user").isEmpty()){
             session.removeAttribute("user");
-            session.removeAttribute("password");
         }else{
             String user = request.getParameter("user");
-            String password = request.getParameter("password");
             session.setAttribute("user", user);
-            session.setAttribute("password", password);
             if( application.getAttribute("count") != null){
                 int countHere = (Integer) application.getAttribute("count");
                 countHere++;
@@ -85,7 +82,6 @@
                 
             }
             session.removeAttribute("user");
-            session.removeAttribute("password");
             session.removeAttribute("megaNums");
             response.sendRedirect("index.jsp");
         }
@@ -102,7 +98,7 @@
 <style>body{background-color: #C8C8C8;}</style>
 <h2>Miguel Lobo</h2>
 <%
-    if(session.getAttribute("user")!= null && session.getAttribute("password")!= null){
+    if(session.getAttribute("user")!= null){
 %>
 <h3>Seja Bem Vindo, <%= session.getAttribute("user") %></h3>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -115,12 +111,11 @@
 </nav>
 <%}%>
  <%
-    if(session.getAttribute("user")== null && session.getAttribute("password")== null){
+    if(session.getAttribute("user")== null){
   %>
         <h3>Login:</h3>
         <form method="POST" action="index.jsp">
             Usuario: <input type="text" name="user"/>
-            Senha: <input type="password" name="password"/>
             <button type="submit" class="btn btn-outline-success" name="login">Enviar</button>
         </form>
         <%}%>

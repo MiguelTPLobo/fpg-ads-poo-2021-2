@@ -17,12 +17,12 @@
     <body>
         <%@include file="WEB-INF/jspf/header.jspf" %>
         <%
-            if(session.getAttribute("user")== null && session.getAttribute("password")== null){
+            if(session.getAttribute("user")== null){
         %>
         <h1 style="color: red"> Você não tem permissão para acessar o conteudo dessa pagina!!! </h1>
         <%}%>
         <%
-            if(session.getAttribute("user")!= null && session.getAttribute("password")!= null){
+            if(session.getAttribute("user")!= null){
         %>
         <h3>Miguel Lobo</h3>
         <h3>1290482012023</h3>
